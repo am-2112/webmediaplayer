@@ -1,0 +1,1 @@
+use fetch api to get data and ui stuff from server for overview, likes, playlists etc, without changing url (like how soundcloud does it) -- home and library will still have different url
