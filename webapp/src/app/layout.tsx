@@ -14,7 +14,7 @@ export default function RootLayout({
                 <div className="toolbar sticky">
                     <Image src="/favicon.ico" alt="img" width="50" height="50"></Image>
                     <nav className="spaced self-center">
-                        <Link id="Home Link" className="spaced" href="/library">Home</Link>
+                        <Link id="Home Link" className="spaced" href="../">Home</Link>
                         <Link id="Library Link" className="spaced" href="/library">Library</Link>
                     </nav>
                 </div>
