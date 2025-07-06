@@ -29,10 +29,53 @@ body {
     text-align: left;
     display: flex;
     flex-direction: row;
-    margin: 10px;
+    margin: 20px;
 }  
 
 .spaced {
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.audioLabel {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.audioViewSize {
+    width: 100px;
+    height: 160px;
+    overflow: hidden;
+    margin-right: 0px;
+    margin-left: 20px;
+    margin-top: 1px;
+    margin-bottom: 40px;
+}
+
+.audioCover {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.audioContainer {
+    max-width: 99%;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-size: 14px;
+}
+
+.artist {
+    font-size: 10px;
+    color: grey;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
 }
