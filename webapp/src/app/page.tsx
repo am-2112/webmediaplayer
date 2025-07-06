@@ -6,7 +6,7 @@ import AudioList from '../app/libs/Audio.tsx'
 
 export default function Page() {
     return (
-        <div id="main-content">
+        <div id="main-content" className="fullSize">
             <AudioList></AudioList>
         </div>
     )
