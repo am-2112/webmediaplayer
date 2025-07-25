@@ -42,4 +42,5 @@ yarn-error.log*
 next-env.d.ts
 
 #audio files
-/src/resources/songs
+/src/resources/songs/
+/webapp/src/resources/songs
