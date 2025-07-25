@@ -1,1 +1,2 @@
 use fetch api to get data and ui stuff from server for overview, likes, playlists etc, without changing url (like how soundcloud does it) -- home and library will still have different url
+for the library, will need to fetch user data from server (requiring login; will also want to allow user to cache this between visits on the same device if desired)

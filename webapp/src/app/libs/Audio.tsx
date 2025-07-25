@@ -5,6 +5,7 @@ import React from 'react'
 import Image from 'next/image'
 
 import '@/app/styles/global.css';
+import uploadfile from '@/resources/upload-file.png'
 
 export default class AudioList extends React.Component {
     /**
@@ -20,10 +21,14 @@ export default class AudioList extends React.Component {
             <>
                 <div className="centered">
                     <div className="audioContainer">
-                        {this.state.children}     
+                        {this.state.children} 
+                        <label className="uploadLabel audioViewSize" htmlFor="audio-files">
+                            <Image className="centered" src={uploadfile} alt="upload-file" width="100" height="100"></Image>
+                            <input type="file" id="audio-files" name="audio-files" accept="audio/*" className="hidden" multiple onChange={this.getUploadedFiles.bind(this)} />
+                            <label className="audioLabel centered" htmlFor="audio-files">Upload File</label>
+                        </label>
                     </div>
-                </div>
-                <input type="file" id="audio-files" name="audio-files" accept="audio/*" multiple onChange={this.getUploadedFiles.bind(this)} />   
+                </div> 
             </>
         )
     }

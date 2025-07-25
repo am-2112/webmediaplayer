@@ -17,6 +17,7 @@ export default function RootLayout({
                         <Link id="Home Link" className="spaced" href="../">Home</Link>
                         <Link id="Library Link" className="spaced" href="/library">Library</Link>
                     </nav>
+                    <input className="searchBar spaced self-center" id="Search Bar" type="text" placeholder="Search"></input>
                 </div>
                 <div className="centered">
                     {children}
