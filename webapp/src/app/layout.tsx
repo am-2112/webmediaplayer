@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import SearchBar from '../app/libs/SearchBar.tsx'
 
 export default function RootLayout({
     children,
@@ -17,7 +18,7 @@ export default function RootLayout({
                         <Link id="Home Link" className="spaced" href="../">Home</Link>
                         <Link id="Library Link" className="spaced" href="/library">Library</Link>
                     </nav>
-                    <input className="searchBar spaced self-center" id="Search Bar" type="text" placeholder="Search"></input>
+                    <SearchBar></SearchBar>
                 </div>
                 <div className="centered">
                     {children}

@@ -7,6 +7,7 @@ import Image from 'next/image'
 import '@/app/styles/global.css';
 import uploadfile from '@/resources/upload-file.png'
 
+/** may want to specify this is client-side in the name, since there will need to be a server-side version when searching is implemented */
 export default class AudioList extends React.Component {
     /**
      * when loading in a new audio file, when the success callback returns, it will create html to represent the metadata and then add it to children (changing the state, causing a re-render below)
@@ -88,5 +89,4 @@ export default class AudioList extends React.Component {
             </div>
         )
     }
-
 }
