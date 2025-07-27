@@ -8,7 +8,7 @@ import '@/app/styles/global.css';
 import uploadfile from '@/resources/upload-file.png'
 
 /** may want to specify this is client-side in the name, since there will need to be a server-side version when searching is implemented */
-export default class AudioList extends React.Component {
+export class ClientAudioList extends React.Component {
     /**
      * when loading in a new audio file, when the success callback returns, it will create html to represent the metadata and then add it to children (changing the state, causing a re-render below)
      */
@@ -66,7 +66,7 @@ export default class AudioList extends React.Component {
                         var imageUri = "data:" + picture.format + ";base64," + window.btoa(base64String);
 
                         self.setState(prevState => ({
-                            children: [...prevState.children, <self.AudioView key={name} src={imageUri} width={100} height={100} tags={tag.tags} />],
+                            children: [...prevState.children, <AudioView key={name} src={imageUri} width={100} height={100} tags={tag.tags} />],
                             names: [...prevState.names, { name }]
                         }))
                     }
@@ -79,8 +79,88 @@ export default class AudioList extends React.Component {
         }
     }
 
-    /** react component(function) handling how each audio piece looks; needs the key attribute since it is part of an array above */
-    AudioView({src, width, height, tags }) {
+    
+}
+
+export class AudioList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state.query = props.query;
+    }
+    componentDidMount() {
+        this.request(); //called twice (because of strict?)
+    }
+
+    state = {
+        children: [],
+        song_ids: [],
+        current_offset: 0,
+        query: ''
+    }
+
+    render() {
+        return (
+            <>
+                <div className="centered">
+                    <div className="audioContainer">
+                        {this.state.children}
+                    </div>
+                </div>
+            </>
+        )
+    }
+
+    
+
+    /** using ajax to request more songs from server based on query and current offset (need to look into preventing sql injection from here though) */
+    async request() {
+        console.log("getting files: ");
+        const files = await GetSongs(this.state.query, this.state.current_offset);
+        if (files) {
+            this.setState(prevState => ({
+                current_offset: prevState.current_offset + files.length
+            }))
+            console.log("finished getting files");
+            console.log(this.state.current_offset);
+
+            for (let i: number = 0; i < files.length; i++) {
+                const self = this;
+                try {
+                    const metadata = await parseWebStream(files[i].file);
+                    console.log(metadata);
+
+                    let name = files[i].id;
+                    let picture = metadata.common.picture;
+                    let base64String = "";
+                    for (let i = 0; i < picture[0].data.length; i++) {
+                        base64String += String.fromCharCode(picture[0].data[i]);
+                    }
+                    let imageUri = "data:" + picture[0].format + ";base64," + window.btoa(base64String);
+
+                    let tag = {
+                        title: metadata.common.title,
+                        artist: metadata.common.artist
+                    };
+
+                    self.setState(prevState => ({
+                        children: [...prevState.children, <AudioView key={name} src={imageUri} width={100} height={100} tags={tag} />],
+                        song_ids: [...prevState.song_ids, { name }]
+                    }))
+
+
+                } catch (error) {
+                    console.error("error", error.message);
+                }
+            }
+        }
+    }
+}
+
+import GetSongs from '../libs/GetSongs'
+import { parseWebStream } from 'music-metadata' /** needed for getting metadata from readableStream */
+
+/** react component(function) handling how each audio piece looks; needs the key attribute since it is part of an array above */
+function AudioView({src, width, height, tags }) {
         return (
             <div className="audioViewSize" title={tags.title }>
                 <Image className="audioCover" alt={tags.title} src={src} width={width} height={height} />
@@ -89,4 +169,3 @@ export default class AudioList extends React.Component {
             </div>
         )
     }
-}

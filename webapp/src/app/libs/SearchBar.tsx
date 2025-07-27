@@ -21,7 +21,7 @@ export default class SearchBar extends React.Component {
         if (input.key == 'Enter' && query != '') {
             console.log(query);
 
-            permanentRedirect('/search?query=' + query);
+            permanentRedirect('/search?query=' + encodeURIComponent(query));
         }
     }
 }

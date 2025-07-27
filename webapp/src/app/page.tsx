@@ -1,13 +1,13 @@
 ﻿import Script from 'next/script'
 import $ from 'jquery'
-import AudioList from '../app/libs/Audio.tsx'
+import { ClientAudioList } from '../app/libs/Audio.tsx'
 
 /** The home page by default will display image metadata for any local songs still saved on cache / localstorage if there are any (see how to check localstorage) */
 
 export default function Page() {
     return (
         <div id="main-content" className="fullSize">
-            <AudioList></AudioList>
+            <ClientAudioList></ClientAudioList>
         </div>
     )
 }
