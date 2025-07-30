@@ -4,6 +4,7 @@ import mysql from 'mysql2/promise'
 //import {promises as fs} from 'fs'
 import fs from 'fs'
 import { createReadableStreamFromReadable } from '@react-router/node'
+import Stream from 'stream'
 
 export default async function GetSongs(query, offset) {
     /** need to access database and query (and order first x item filenames) - ajax to load sound files (will want to store details in env and gitignore the file) */
@@ -26,7 +27,7 @@ export default async function GetSongs(query, offset) {
         WHERE MATCH (title, artists)
         AGAINST ("*` + query + `*" IN BOOLEAN MODE)
         ORDER BY relevance DESC, soundtracks.songs.upload_date DESC
-        LIMIT 30 OFFSET ` + offset;
+        LIMIT 20 OFFSET ` + offset;
 
         const [results] = await connection.execute(search_query);
         console.log("results: ");
@@ -35,7 +36,9 @@ export default async function GetSongs(query, offset) {
         /** may want to send a compressed version across internet before decompressing, or stream the files */
         const files = await Promise.all(results.map(async (o) => {
             const path = './src/resources/songs/' + o.song_id + '.' + o.ext;
-            return {file: createReadableStreamFromReadable(fs.createReadStream(path)), id: o.song_id };//ReadableStream.from(path);//Buffer.from(await fs.readFile(path)).toString();
+            console.log(path);
+            return {
+                file: createReadableStreamFromReadable(fs.createReadStream(path)), id: o.song_id};
         }));
         console.log(files);
         return files;

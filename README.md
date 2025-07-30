@@ -33,4 +33,6 @@ cd [webapp-path]
 npm run start
 ```
 
+Dependencies will also need to be installed using npm in the same directory before running.
+
 And stopped using ctrl+c.

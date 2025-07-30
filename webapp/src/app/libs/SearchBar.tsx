@@ -10,7 +10,7 @@ import { permanentRedirect } from 'next/navigation'
 export default class SearchBar extends React.Component {
     render() {
         return (
-            <input className="searchBar spaced self-center" id="Search Bar" type="text" placeholder="Search" onKeyDown={this.search.bind(this) }></input> 
+            <input className="searchBar spaced self-center" id="Search Bar" type="text" placeholder="Search" onKeyDown={this.search.bind(this)}></input> 
         )
     }
 
