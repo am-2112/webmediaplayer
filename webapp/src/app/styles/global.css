@@ -72,12 +72,17 @@ body {
 }
 
 .title {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .artist {
     font-size: 10px;
     color: grey;
+}
+
+.time {
+    font-size: 14px;
+    align-content: center;
 }
 
 .centered {
@@ -140,6 +145,9 @@ body {
 .start-play-bar {
     margin-left: 40px;
 }
+.end-play-bar {
+    margin-right: 40px;
+}
 
 .overlay {
     position: relative;
@@ -156,4 +164,25 @@ body {
 
 .container:hover .overlay {
     width: 100%;
+}
+
+.permOverlay {
+    position: relative;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin-bottom: -100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.soundmeter {
+    align-self: center;
+    height: 3px;
+    width: 100%;
+    background: none;
+    accent-color: cyan;
 }
